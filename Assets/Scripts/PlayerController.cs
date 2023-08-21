@@ -8,6 +8,7 @@ public class Movement : MonoBehaviour
     public float speedValue;
     public float jumpForce;
     public Rigidbody body;
+    private int dontInfinetJump = 2;
 
     // Start is called before the first frame update
     void Start()
@@ -19,9 +20,14 @@ public class Movement : MonoBehaviour
     void Update()
     {
        body.velocity = new Vector3(Input.GetAxis("Horizontal")*speedValue, body.velocity.y, Input.GetAxis("Vertical")*speedValue);
-       if(Input.GetButtonDown("Jump"))
+       if(Input.GetButtonDown("Jump")&& dontInfinetJump>0)
        {
             body.velocity = new Vector3(body.velocity.x, jumpForce, body.velocity.z);
+            dontInfinetJump = dontInfinetJump -1;
+       }
+       if (body.velocity = new Vector3(body.velocity.x, 0, body.velocityz);)
+       {
+        dontInfinetJump = 2;
        }
     }
 }
