@@ -9,6 +9,7 @@ public class Movement : MonoBehaviour
     public float jumpForce;
     public Rigidbody body;
     private int dontInfinetJump = 2;
+    private bool resetJumps = false;
 
     // Start is called before the first frame update
     void Start()
@@ -25,9 +26,14 @@ public class Movement : MonoBehaviour
             body.velocity = new Vector3(body.velocity.x, body.velocity.y + jumpForce, body.velocity.z);
             dontInfinetJump = dontInfinetJump -1;
        }
-       if (body.velocity.y == 0)
+       if (body.velocity.y<0)
+       {
+            resetJumps = true;
+       }
+       if (body.velocity.y == 0 && resetJumps == true)
        {
         dontInfinetJump = 2;
+        resetJumps = false;
        }
     }
 }
