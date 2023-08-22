@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-public class BUttonPressing : MonoBehaviour
+
+public class StateSettingsController : MonoBehaviour
 {
+    public static float sensitivity;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,15 +16,9 @@ public class BUttonPressing : MonoBehaviour
     {
         
     }
-
-    public void PlayGame()
+    public void ChangeSensitivity(float pSensitivity)
     {
-        SceneManager.LoadScene(1);
+        sensitivity = pSensitivity;
+        Debug.Log(sensitivity);
     }
-
-    /*
-    public void AdjustSettings() {
-        SceneManager.LoadScene(2);
-    }
-    */
 }
