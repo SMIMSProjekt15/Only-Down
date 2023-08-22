@@ -5,10 +5,12 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
 
-    public float speedValue;
-    public float jumpForce;
+    public float speedValue = 5;
+    public float jumpForce = 5;
     public Rigidbody body;
     private int dontInfinetJump = 2;
+    public bool sprintEnabeled = false;
+    public bool bootsPickedUp = false;
 
     // Start is called before the first frame update
     void Start()
@@ -29,5 +31,25 @@ public class Movement : MonoBehaviour
        {
         dontInfinetJump = 2;
        }
+       this.Sprint();
+    }
+    public void Sprint()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift)&&sprintEnabeled==true&&bootsPickedUp==true)
+       {
+            speedValue = 20;
+            sprintEnabeled = false;
+       }
+       else
+            if(Input.GetKeyDown(KeyCode.LeftShift)&&sprintEnabeled==false&&bootsPickedUp==true)
+       {
+            sprintEnabeled = true;
+            speedValue = 5;
+       }
+    }
+    public void pickUpBoots()
+    {
+        bootsPickedUp = true;
+        sprintEnabeled = true;
     }
 }
