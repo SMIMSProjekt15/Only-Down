@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3189812772792294839}
   - component: {fileID: 5144452110237859598}
   - component: {fileID: 6170981051082938418}
+  - component: {fileID: 2439721360262365421}
   m_Layer: 0
   m_Name: JetPack
   m_TagString: Untagged
@@ -68,6 +69,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickUpEffect: {fileID: 6716933543107358056, guid: 8a334e7c388e77347a1dddd727ef3446, type: 3}
+--- !u!114 &2439721360262365421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7061236747489145674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48a35bc959a7d634c9d2463f585fbeda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 50
 --- !u!1001 &6066990479006619112
 PrefabInstance:
   m_ObjectHideFlags: 0

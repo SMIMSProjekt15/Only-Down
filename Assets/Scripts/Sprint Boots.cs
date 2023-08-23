@@ -17,7 +17,7 @@ public class SprintBoots : MonoBehaviour
 
     void Pickup(Collider player)
     {
-        Instantiate(pickUpEffect, transform.position, transform.rotation);
+        Instantiate(pickUpEffect, transform.position + new Vector3(0, -1.8f, 0), transform.rotation);
         playerScript = player.GetComponent<Movement>();
         playerScript.pickUpBoots();
         Destroy(gameObject);

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3013697921837809597}
   - component: {fileID: 4655063950864980967}
   - component: {fileID: 1198919904055064619}
+  - component: {fileID: 3389927506287338692}
   m_Layer: 0
   m_Name: Speed Boots
   m_TagString: Untagged
@@ -33,7 +34,7 @@ Transform:
   m_Children:
   - {fileID: 217304312212329111}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &3013697921837809597
 BoxCollider:
@@ -90,6 +91,19 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 3
   m_Center: {x: 0, y: 2, z: 0}
+--- !u!114 &3389927506287338692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4541155575604433860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48a35bc959a7d634c9d2463f585fbeda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 50
 --- !u!1001 &328406958903063932
 PrefabInstance:
   m_ObjectHideFlags: 0
