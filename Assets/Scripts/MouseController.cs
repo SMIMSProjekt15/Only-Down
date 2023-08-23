@@ -12,6 +12,7 @@ public class MouseController : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        SetSensitivity(SettingsMenu.sensitivity, SettingsMenu.sensitivity);
     }
 
     // Update is called once per frame
