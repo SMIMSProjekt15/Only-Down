@@ -5,8 +5,8 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
 
-    public float speedValue;
-    public float jumpForce;
+    public float speedValue = 5;
+    public float jumpForce = 5;
     public Rigidbody body;
     private int dontInfinetJump = 2;
 
@@ -19,7 +19,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       body.velocity = new Vector3(Input.GetAxis("Horizontal")*speedValue, body.velocity.y, Input.GetAxis("Vertical")*speedValue);
+       body.velocity = transform.TransformDirection(new Vector3(Input.GetAxis("Horizontal")*speedValue, body.velocity.y, Input.GetAxis("Vertical")*speedValue));
        if(Input.GetButtonDown("Jump")&& dontInfinetJump>0)
        {
             body.velocity = new Vector3(body.velocity.x, body.velocity.y + jumpForce, body.velocity.z);
