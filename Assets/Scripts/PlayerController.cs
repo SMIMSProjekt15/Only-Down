@@ -6,10 +6,8 @@ using UnityEngine.EventSystems;
 
 public class Movement : MonoBehaviour
 {
+
     [Header("Movement")]
-    public float speedValue = 5;
-    public float jumpForce = 5;
-    public int dontInfinetJump = 2;
     public float slideSpeed;
     public float currentSpeed;
 
@@ -31,9 +29,21 @@ public class Movement : MonoBehaviour
     float horizontalInput;
     float verticalInput;
 
+    public float sprintSpeed = 6;
+    public float speedValue = 3;
+    private float speed;
+    public float jumpForce = 3;
+    public Rigidbody body;
+    private int jumpCount = 0;
+    private int maxJumps = 1;
+    private bool sprintEnabeled = false;
+    private bool bootsPickedUp = false;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        speed = speedValue;
         body = GetComponent<Rigidbody>();
     }
 
@@ -58,16 +68,18 @@ public class Movement : MonoBehaviour
         {
             body.velocity = transform.TransformDirection(new Vector3(horizontalInput * currentSpeed, body.velocity.y, verticalInput * currentSpeed));
         }
-       if(Input.GetButtonDown("Jump")&& dontInfinetJump>0)
+       if(Input.GetButtonDown("Jump")&& jumpCount<maxJumps)
        {
             exitingSlope = true;
             body.velocity = new Vector3(body.velocity.x, body.velocity.y + jumpForce, body.velocity.z);
-            dontInfinetJump = dontInfinetJump -1;
+            jumpCount++;
        }
        if (body.velocity.y <0.125 && body.velocity.y > -0.125)
        {
-            dontInfinetJump = 2;
+            jumpCount=0;
             exitingSlope = false;
+       }
+       this.Sprint();
        }
 
         //turn off gravity while on slope 
@@ -165,5 +177,29 @@ public class Movement : MonoBehaviour
                 body.velocity = new Vector3(limitedVel.x, body.velocity.y, limitedVel.z);
             }
         }
+    }
+    public void Sprint()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift)&&sprintEnabeled==true&&bootsPickedUp==true)
+       {
+            speedValue = sprintSpeed;
+            sprintEnabeled = false;
+       }
+       else
+            if(Input.GetKeyDown(KeyCode.LeftShift)&&sprintEnabeled==false&&bootsPickedUp==true)
+       {
+            sprintEnabeled = true;
+            speedValue = speed;
+       }
+    }
+    public void pickUpBoots()
+    {
+        bootsPickedUp = true;
+        sprintEnabeled = true;
+    }
+
+    public void pickUpJetPack()
+    {
+          maxJumps = 2;
     }
 }
