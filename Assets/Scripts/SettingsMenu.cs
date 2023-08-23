@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SettingsMenu : MonoBehaviour
 {
-    public static float sensitivity;
+    public static float sensitivity = 0.50f;
     public void SetSensitivity(float pSensitivity)
     {
         sensitivity = pSensitivity;
