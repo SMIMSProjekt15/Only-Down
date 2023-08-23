@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+
     public float speedValue = 5;
     public float jumpForce = 5;
     public Rigidbody body;

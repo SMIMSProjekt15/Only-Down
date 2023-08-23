@@ -10,13 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1889120186808459289}
   - component: {fileID: 4385351044812090509}
+  - component: {fileID: 8572223224631790949}
+  - component: {fileID: 1597272567466622666}
   - component: {fileID: 8759493693920200597}
   - component: {fileID: 3530726188429236505}
-  - component: {fileID: 1599794904237942767}
   - component: {fileID: 3613219821342053938}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35,7 +36,7 @@ Transform:
   m_Children:
   - {fileID: 175580180342815897}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4385351044812090509
 MeshFilter:
@@ -45,6 +46,38 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 832708052064377400}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &8572223224631790949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832708052064377400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9545f718cf617834fa4450be6de56c43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedValue: 4
+  jumpForce: 4
+  body: {fileID: 3613219821342053938}
+--- !u!114 &1597272567466622666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832708052064377400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e8c29e49b1a2104385ed69b17103acd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 175580180342815897}
+  player: {fileID: 1889120186808459289}
+  turn: {x: 0, y: 0}
+  sensitivityX: 2
+  sensitivityY: 2
 --- !u!23 &8759493693920200597
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -110,21 +143,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1599794904237942767
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 832708052064377400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9545f718cf617834fa4450be6de56c43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speedValue: 5
-  jumpForce: 5
-  body: {fileID: 3613219821342053938}
 --- !u!54 &3613219821342053938
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -216,9 +234,9 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
-  field of view: 60
+  field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
