@@ -7,7 +7,6 @@ public class SettingsMenu : MonoBehaviour
     public static float sensitivity;
     public void SetSensitivity (float pSensitivity)
     {
-        Debug.Log(pSensitivity);
         sensitivity = pSensitivity;
     }
     // Start is called before the first frame update

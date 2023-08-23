@@ -24,9 +24,9 @@ public class MouseController : MonoBehaviour
     
     }
 
-    public void SetSensitivity(float pSensitivityX = 2, float pSensitivityY = 2)
+    public void ChangeSensitivity(float pSensitivity = 2)
     {
-        sensitivityX = pSensitivityX;
-        sensitivityY = pSensitivityY;
+        sensitivityX = pSensitivity;
+        sensitivityY = pSensitivity;
     }
 }
