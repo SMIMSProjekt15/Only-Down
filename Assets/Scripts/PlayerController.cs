@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour
     public float speedValue = 5;
     public float jumpForce = 5;
     public Rigidbody body;
-    private int dontInfinetJump = 2;
+    public int dontInfinetJump = 2;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +25,7 @@ public class Movement : MonoBehaviour
             body.velocity = new Vector3(body.velocity.x, body.velocity.y + jumpForce, body.velocity.z);
             dontInfinetJump = dontInfinetJump -1;
        }
-       if (body.velocity.y == 0)
+       if (body.velocity.y <0.125 && body.velocity.y > -0.125)
        {
         dontInfinetJump = 2;
        }
