@@ -14,7 +14,7 @@ public class MouseController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()s
+    void Update()
     {
         turn.x += Input.GetAxis("Mouse X") * multiplier;
         turn.y += Input.GetAxis("Mouse Y") * multiplier;
