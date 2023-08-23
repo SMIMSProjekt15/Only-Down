@@ -1,9 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-public class BUttonPressing : MonoBehaviour
+
+public class SettingsMenu : MonoBehaviour
 {
+    public static float sensitivity;
+    public void SetSensitivity (float pSensitivity)
+    {
+        Debug.Log(pSensitivity);
+        sensitivity = pSensitivity;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -15,15 +21,4 @@ public class BUttonPressing : MonoBehaviour
     {
         
     }
-
-    public void PlayGame()
-    {
-        SceneManager.LoadScene(1);
-    }
-
-    /*
-    public void AdjustSettings() {
-        SceneManager.LoadScene(2);
-    }
-    */
 }

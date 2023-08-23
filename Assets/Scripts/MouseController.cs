@@ -9,7 +9,7 @@ public class MouseController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        multiplier = 1;
+        multiplier = SettingsMenu.sensitivity;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -21,7 +21,7 @@ public class MouseController : MonoBehaviour
         transform.localRotation = Quaternion.Euler(-turn.y, turn.x, 0);
     }
 
-    public void changeMultiplier(float pMultiplier)
+    public void ChangeMultiplier(float pMultiplier)
     {
         multiplier = pMultiplier;
     }
