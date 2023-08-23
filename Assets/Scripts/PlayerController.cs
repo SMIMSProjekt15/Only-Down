@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-
-    private bool resetJump = false;
     public float speedValue = 5;
     public float jumpForce = 5;
     public Rigidbody body;
     private int jumpCount = 0;
+    private int maxJumps = 1;
     private bool sprintEnabeled = false;
     private bool bootsPickedUp = false;
-    private bool jetPackPickedUp = false;
-    private bool doubleJumpEnabeld = false;
 
 
     // Start is called before the first frame update
@@ -26,7 +23,7 @@ public class Movement : MonoBehaviour
     void Update()
     {
        body.velocity = new Vector3(Input.GetAxis("Horizontal")*speedValue, body.velocity.y, Input.GetAxis("Vertical")*speedValue);
-       if(Input.GetButtonDown("Jump")&& dontInfinetJump==0)
+       if(Input.GetButtonDown("Jump")&& jumpCount < maxJumps)
        {
             body.velocity = new Vector3(body.velocity.x, body.velocity.y + jumpForce, body.velocity.z);
             jumpCount++;
@@ -59,6 +56,6 @@ public class Movement : MonoBehaviour
 
     public void pickUpJetPack()
     {
-
+          maxJumps = 2;
     }
 }
