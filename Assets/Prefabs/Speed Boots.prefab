@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 217304312212329111}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &3013697921837809597
 BoxCollider:
@@ -147,7 +147,9 @@ PrefabInstance:
       value: Sketchfab_2016_12_09_14_59_21
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8934777400606672865, guid: 1815a7ff1dc74174aa436a33e80670f6, type: 3}
+    - {fileID: 65702495048144492, guid: 1815a7ff1dc74174aa436a33e80670f6, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1815a7ff1dc74174aa436a33e80670f6, type: 3}

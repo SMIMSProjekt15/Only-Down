@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-
-    public float speedValue = 5;
-    public float jumpForce = 5;
+    public float sprintSpeed = 6;
+    public float speedValue = 3;
+    private float speed;
+    public float jumpForce = 3;
     public Rigidbody body;
     private int jumpCount = 0;
     private int maxJumps = 1;
@@ -17,13 +18,14 @@ public class Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        speed = speedValue;
         body = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-       body.velocity = new Vector3(Input.GetAxis("Horizontal")*speedValue, body.velocity.y, Input.GetAxis("Vertical")*speedValue);
+       body.velocity = transform.TransformDirection(new Vector3(Input.GetAxis("Horizontal")*speedValue, body.velocity.y, Input.GetAxis("Vertical")*speedValue));
        if(Input.GetButtonDown("Jump")&& jumpCount < maxJumps)
        {
             body.velocity = new Vector3(body.velocity.x, body.velocity.y + jumpForce, body.velocity.z);
@@ -39,14 +41,14 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftShift)&&sprintEnabeled==true&&bootsPickedUp==true)
        {
-            speedValue = 20;
+            speedValue = sprintSpeed;
             sprintEnabeled = false;
        }
        else
             if(Input.GetKeyDown(KeyCode.LeftShift)&&sprintEnabeled==false&&bootsPickedUp==true)
        {
             sprintEnabeled = true;
-            speedValue = 5;
+            speedValue = speed;
        }
     }
     public void pickUpBoots()

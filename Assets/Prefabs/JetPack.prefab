@@ -64,10 +64,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7061236747489145674}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbc922f6e7349854f97382faf16d2ebd, type: 3}
+  m_Script: {fileID: 11500000, guid: 82497a25fbc0d0047b97416bfcd6ab8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickUpEffect: {fileID: 56852242586695119, guid: 4d7e19c9fcb52be4bb9a8ba855ffe12d, type: 3}
+  pickUpEffect: {fileID: 56852242586695119, guid: 4362b6a454125ea4aa50d739dd674527, type: 3}
 --- !u!1001 &6066990479006619112
 PrefabInstance:
   m_ObjectHideFlags: 0
