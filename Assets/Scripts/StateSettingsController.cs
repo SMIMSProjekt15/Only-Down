@@ -19,6 +19,5 @@ public class StateSettingsController : MonoBehaviour
     public void ChangeSensitivity(float pSensitivity)
     {
         sensitivity = pSensitivity;
-        Debug.Log(sensitivity);
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1889120186808459289}
   - component: {fileID: 4385351044812090509}
   - component: {fileID: 8572223224631790949}
-  - component: {fileID: 1463878856947063886}
+  - component: {fileID: 1597272567466622666}
   - component: {fileID: 8759493693920200597}
   - component: {fileID: 3530726188429236505}
   - component: {fileID: 3613219821342053938}
@@ -61,7 +61,7 @@ MonoBehaviour:
   speedValue: 2
   jumpForce: 2
   body: {fileID: 3613219821342053938}
---- !u!114 &1463878856947063886
+--- !u!114 &1597272567466622666
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,13 +70,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 832708052064377400}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c98caa65840a92a4094ea5456ad37c95, type: 3}
+  m_Script: {fileID: 11500000, guid: 3e8c29e49b1a2104385ed69b17103acd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 175580180342815897}
   player: {fileID: 1889120186808459289}
   turn: {x: 0, y: 0}
-  sensitivityX: 0
+  sensitivityX: 2
   sensitivityY: 2
 --- !u!23 &8759493693920200597
 MeshRenderer:

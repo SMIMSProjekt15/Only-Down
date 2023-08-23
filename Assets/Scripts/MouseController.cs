@@ -12,7 +12,7 @@ public class MouseController : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        SetSensitivity(SettingsMenu.sensitivity, SettingsMenu.sensitivity);
+        ChangeSensitivity(SettingsMenu.sensitivity);
     }
 
     // Update is called once per frame
@@ -25,9 +25,9 @@ public class MouseController : MonoBehaviour
     
     }
 
-    public void SetSensitivity(float pSensitivityX = 2, float pSensitivityY = 2)
+    public void ChangeSensitivity(float pSensitivity = 2)
     {
-        sensitivityX = pSensitivityX;
-        sensitivityY = pSensitivityY;
+        sensitivityX = pSensitivity;
+        sensitivityY = pSensitivity;
     }
 }
