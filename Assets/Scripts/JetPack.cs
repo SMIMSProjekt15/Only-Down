@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class JetPack : MonoBehaviour
 {
-   public Movement playerScript;
+   private Movement playerScript;
+   public GameObject pickUpEffect;
     void OnTriggerEnter (Collider other)
     {
         if (other.CompareTag("Player"))
@@ -15,6 +16,7 @@ public class JetPack : MonoBehaviour
 
     void Pickup(Collider player)
     {
+        Instantiate(pickUpEffect, transform.position, transform.rotation);
         playerScript = player.GetComponent<Movement>();
         playerScript.pickUpJetPack();
         Destroy(gameObject);

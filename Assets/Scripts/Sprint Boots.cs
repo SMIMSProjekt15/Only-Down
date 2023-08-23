@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class SprintBoots : MonoBehaviour
 {
-    public Movement playerScript;
+    private Movement playerScript;
+    public GameObject pickUpEffect;
     void OnTriggerEnter (Collider other)
     {
         if (other.CompareTag("Player"))
@@ -16,6 +17,7 @@ public class SprintBoots : MonoBehaviour
 
     void Pickup(Collider player)
     {
+        Instantiate(pickUpEffect, transform.position, transform.rotation);
         playerScript = player.GetComponent<Movement>();
         playerScript.pickUpBoots();
         Destroy(gameObject);
