@@ -25,7 +25,7 @@ public class Movement : MonoBehaviour
 
     [Header("WallMovementFix")]
     public float yVelocity;
-
+    private RaycastHit wallHit;
     
     //public Rigidbody body;
     private Vector3 moveDirection;
@@ -44,6 +44,7 @@ public class Movement : MonoBehaviour
     private bool bootsPickedUp = false;
     public bool onWall = false;
     public bool disablePlayerMovementUp = false;
+    public float playerWidth = 0.6f;
 
 
     // Start is called before the first frame update
@@ -73,16 +74,22 @@ public class Movement : MonoBehaviour
         else
         {
             disablePlayerMovementUp = DetectOnWall();
-            if (disablePlayerMovementUp) //&& body.velocity.y > 0)
+            /*if (disablePlayerMovementUp) //&& body.velocity.y > 0)
             {
-                body.velocity = transform.TransformDirection(new Vector3(0, 0, 0));
-                //body.velocity = transform.TransformDirection(new Vector3(horizontalInput * currentSpeed, -10f, verticalInput * currentSpeed));
+                body.velocity = transform.TransformDirection(new Vector3(horizontalInput * currentSpeed, -10f, verticalInput * currentSpeed));
             }
             else
             {
 
-                body.velocity = transform.TransformDirection(new Vector3(horizontalInput * currentSpeed, body.velocity.y, verticalInput * currentSpeed));
+            // player nach unten pushen, wenn an ner wand
+             */
+
+            if (disablePlayerMovementUp && body.velocity.y > 0)
+            {
+                body.AddForce(Vector3.down, ForceMode.Force);
             }
+                body.velocity = transform.TransformDirection(new Vector3(horizontalInput * currentSpeed, body.velocity.y, verticalInput * currentSpeed));
+            //}
         }
         //else if (!DetectOnWall())
         //{
@@ -195,11 +202,11 @@ public class Movement : MonoBehaviour
     
     public bool DetectOnWall()
     {
-        if(Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f)) 
+        if(Physics.Raycast(transform.position, Vector3.down, out wallHit, playerWidth * 0.5f + 0.3f)) 
         {
-            float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
+            float angle = Vector3.Angle(Vector3.up, wallHit.normal);
             
-            return angle > maxSlopeAngle &&angle != 0;
+            return angle >= maxSlopeAngle && angle!=180;
         }
 
         return false;
