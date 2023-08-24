@@ -198,7 +198,8 @@ public class Movement : MonoBehaviour
         if(Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f)) 
         {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
-            return angle > maxSlopeAngle;
+            
+            return angle > maxSlopeAngle &&angle != 0;
         }
 
         return false;
@@ -206,7 +207,9 @@ public class Movement : MonoBehaviour
 
     public Vector3 GetSlopeMoveDirection(Vector3 direction)
     {
+        Debug.Log("jetzt");
         return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
+        
     }
 
     private void SpeedControll() 
@@ -214,6 +217,7 @@ public class Movement : MonoBehaviour
         //limiting speed on slope
         if(OnSlope() && !exitingSlope)
         {
+            Debug.Log("onslope");
             if (body.velocity.magnitude > currentSpeed)
                 body.velocity = body.velocity.normalized * currentSpeed;
         }
