@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &229466065386160114
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8197643227709976447}
+  m_Layer: 0
+  m_Name: Orientation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8197643227709976447
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229466065386160114}
+  m_LocalRotation: {x: -0, y: 0.38268343, z: -0, w: 0.92387956}
+  m_LocalPosition: {x: 18.474342, y: -13.833332, z: 58.82657}
+  m_LocalScale: {x: 3.333333, y: 3.333333, z: 3.333333}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1889120186808459289}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &832708052064377400
 GameObject:
   m_ObjectHideFlags: 0
@@ -15,6 +46,7 @@ GameObject:
   - component: {fileID: 8759493693920200597}
   - component: {fileID: 3530726188429236505}
   - component: {fileID: 3613219821342053938}
+  - component: {fileID: 3851657026089512408}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -35,6 +67,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 175580180342815897}
+  - {fileID: 8197643227709976447}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -58,9 +91,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9545f718cf617834fa4450be6de56c43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slideSpeed: 0
+  currentSpeed: 0
+  sliding: 0
+  maxSlopeAngle: 0
+  playerHeight: 0
+  orientation: {fileID: 8197643227709976447}
+  sprintSpeed: 6
   speedValue: 4
   jumpForce: 4
   body: {fileID: 3613219821342053938}
+  onWall: 0
 --- !u!114 &1597272567466622666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,6 +116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 175580180342815897}
   player: {fileID: 1889120186808459289}
+  orientation: {fileID: 8197643227709976447}
   turn: {x: 0, y: 0}
   sensitivityX: 2
   sensitivityY: 2
@@ -170,6 +212,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &3851657026089512408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832708052064377400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 560922cad0d0ff84097ac434e9b70424, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: {fileID: 0}
+  playerObj: {fileID: 0}
+  maxSlideTime: 0.75
+  slideForce: 200
+  slideTimer: 0
+  slideYScale: 0.075
+  slideKey: 306
 --- !u!1 &1541078059029658414
 GameObject:
   m_ObjectHideFlags: 0
