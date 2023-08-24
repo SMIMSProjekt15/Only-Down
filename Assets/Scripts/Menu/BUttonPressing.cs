@@ -4,26 +4,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class BUttonPressing : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void PlayGame()
     {
         SceneManager.LoadScene(2);
     }
 
-    /*
-    public void AdjustSettings() {
-        SceneManager.LoadScene(2);
+    public void ReturnToMenu()
+    {
+        SceneManager.LoadScene(1);
     }
-    */
 }
