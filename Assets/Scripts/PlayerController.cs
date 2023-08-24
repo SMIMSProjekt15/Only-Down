@@ -16,7 +16,7 @@ public class Movement : MonoBehaviour
     public bool sliding;
 
     [Header("Slope Handling")]
-    public float maxSlopeAngle;
+    public float maxSlopeAngle = 40f;
     private RaycastHit slopeHit;
     private bool exitingSlope;
 
@@ -38,6 +38,7 @@ public class Movement : MonoBehaviour
     private int maxJumps = 1;
     private bool sprintEnabeled = false;
     private bool bootsPickedUp = false;
+    public bool onWall = false;
 
 
     // Start is called before the first frame update
@@ -74,13 +75,22 @@ public class Movement : MonoBehaviour
             body.velocity = new Vector3(body.velocity.x, body.velocity.y + jumpForce, body.velocity.z);
             jumpCount++;
        }
-       if (body.velocity.y <0.125 && body.velocity.y > -0.125)
+       if (body.velocity.y == 0)
        {
             jumpCount=0;
             exitingSlope = false;
        }
        
-
+        if (detectOnWall())
+        {
+            speedValue = 0;
+            body.velocity = new Vector3(body.velocity.x,-0.5f,body.velocity.z);
+            onWall = true;
+        }
+        if (!detectOnWall() && speedValue ==0)
+        {
+            speedValue = speed;
+        }
         //turn off gravity while on slope 
         body.useGravity = !OnSlope();
     }
@@ -148,7 +158,8 @@ public class Movement : MonoBehaviour
 
     public bool OnSlope()
     {
-        if(Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f)) {
+        if(Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f)) 
+        {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             return angle < maxSlopeAngle && angle != 0;
         }
@@ -156,6 +167,17 @@ public class Movement : MonoBehaviour
         return false;
     }
     
+    public bool detectOnWall()
+    {
+        if(Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f)) 
+        {
+            float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
+            return angle > maxSlopeAngle;
+        }
+
+        return false;
+    }
+
     public Vector3 GetSlopeMoveDirection(Vector3 direction)
     {
         return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;

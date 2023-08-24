@@ -179,7 +179,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &79454067 stripped
 GameObject:
@@ -820,10 +820,21 @@ PrefabInstance:
       propertyPath: speedValue
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8572223224631790949, guid: 00de8a081f20e4d448a920fb89d5ac20, type: 3}
+      propertyPath: playerHeight
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8572223224631790949, guid: 00de8a081f20e4d448a920fb89d5ac20, type: 3}
+      propertyPath: maxSlopeAngle
+      value: 40
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 832708052064377400, guid: 00de8a081f20e4d448a920fb89d5ac20, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1445372277}
   m_SourcePrefab: {fileID: 100100000, guid: 00de8a081f20e4d448a920fb89d5ac20, type: 3}
 --- !u!1 &705507993
 GameObject:
@@ -1292,6 +1303,35 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5229549208064432429, guid: afd0d772719c0394da7780f4c10fe3b2, type: 3}
+--- !u!1 &1445372269 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 832708052064377400, guid: 00de8a081f20e4d448a920fb89d5ac20, type: 3}
+  m_PrefabInstance: {fileID: 685676931}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1445372276 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1889120186808459289, guid: 00de8a081f20e4d448a920fb89d5ac20, type: 3}
+  m_PrefabInstance: {fileID: 685676931}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1445372277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445372269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 560922cad0d0ff84097ac434e9b70424, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: {fileID: 77510446}
+  playerObj: {fileID: 1445372276}
+  maxSlideTime: 0.75
+  slideForce: 200
+  slideTimer: 0
+  slideYScale: 0.075
+  slideKey: 306
 --- !u!1 &1505335490 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2188666253804438866, guid: 201057e3cfc8ba74a91e4640e659adcc, type: 3}
@@ -1466,7 +1506,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1760853702 stripped
 GameObject:
