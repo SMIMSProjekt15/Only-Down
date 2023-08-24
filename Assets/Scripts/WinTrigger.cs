@@ -16,6 +16,7 @@ public class WinTrigger : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             StaticTime.Time = script.FormatTime();
+            Cursor.lockState = CursorLockMode.Confined;
             SceneManager.LoadScene(4);
         }
     }

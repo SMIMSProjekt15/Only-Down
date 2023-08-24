@@ -23,7 +23,6 @@ public class timer : MonoBehaviour
     }
     void DisplayTime()
     {
-        currentTime += 1;
         timeText.text = FormatTime();
     }
     public string FormatTime()
