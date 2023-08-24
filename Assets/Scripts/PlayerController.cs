@@ -12,6 +12,8 @@ public class Movement : MonoBehaviour
     public float slideSpeed = 40f;
     public float currentSpeed;
 
+    private float groundCheckDistance;
+    //private float bufferCheckDistance = 0.00001f;
     private float desiredMoveSpeed;
     private float lastDesiredMoveSpeed;
     public bool sliding;
@@ -44,6 +46,7 @@ public class Movement : MonoBehaviour
     private bool bootsPickedUp = false;
     public bool onWall = false;
     public bool disablePlayerMovementUp = false;
+    private float verzögerung = 0;
 
 
     // Start is called before the first frame update
@@ -93,16 +96,30 @@ public class Movement : MonoBehaviour
         //    //currentSpeed = 0;
         //    body.velocity = transform.TransformDirection(new Vector3(horizontalInput*currentSpeed, -0.5f, verticalInput *currentSpeed));
         //}
-       if(Input.GetButtonDown("Jump")&& jumpCount<maxJumps && !disablePlayerMovementUp)
-       {
-            exitingSlope = true;
-            body.velocity = new Vector3(body.velocity.x, body.velocity.y + jumpForce, body.velocity.z);
-            jumpCount++;
-       }
+        if (!(verzögerung <= 0))
+        {
+            verzögerung = verzögerung -1f;
+        }
+        else
+        {
+            if(Input.GetButtonDown("Jump")&& jumpCount<maxJumps && !disablePlayerMovementUp)
+            {
+                exitingSlope = true;
+                body.velocity = new Vector3(body.velocity.x, body.velocity.y + jumpForce, body.velocity.z);
+                jumpCount++;
+                verzögerung = verzögerung +10;
+            }
+        }
        if (body.velocity.y == 0)
        {
-            jumpCount=0;
             exitingSlope = false;
+       }
+
+       groundCheckDistance = (GetComponent<CapsuleCollider>().height/2);
+       RaycastHit hit;
+       if (Physics.Raycast(transform.position, -transform.up, out hit, groundCheckDistance))
+       {
+        jumpCount = 0;
        }
        /*
         if (DetectOnWall())
