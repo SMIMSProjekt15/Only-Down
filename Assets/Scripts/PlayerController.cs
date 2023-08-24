@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,7 +8,9 @@ public class Movement : MonoBehaviour
 {
 
     [Header("Movement")]
-    public float slideSpeed = 40f;
+    public float slideSpeed;
+    public float groundCheckDistance;
+    private float bufferCheckDistance = 0.001f;
     public float currentSpeed;
 
     private float desiredMoveSpeed;
@@ -17,16 +18,13 @@ public class Movement : MonoBehaviour
     public bool sliding;
 
     [Header("Slope Handling")]
-    public float maxSlopeAngle = 40f;
+    public float maxSlopeAngle;
     private RaycastHit slopeHit;
     private bool exitingSlope;
 
     public float playerHeight;
 
-    [Header("WallMovementFix")]
-    public float yVelocity;
 
-    
     //public Rigidbody body;
     private Vector3 moveDirection;
     public Transform orientation;
@@ -42,8 +40,6 @@ public class Movement : MonoBehaviour
     private int maxJumps = 1;
     private bool sprintEnabeled = false;
     private bool bootsPickedUp = false;
-    public bool onWall = false;
-    public bool disablePlayerMovementUp = false;
 
 
     // Start is called before the first frame update
@@ -72,52 +68,27 @@ public class Movement : MonoBehaviour
         }
         else
         {
-            disablePlayerMovementUp = DetectOnWall();
-            if (disablePlayerMovementUp && body.velocity.y > 0)
-            {
-                body.velocity = transform.TransformDirection(new Vector3(horizontalInput * currentSpeed, -10f, verticalInput * currentSpeed));
-            }
-            else
-            {
-
-                body.velocity = transform.TransformDirection(new Vector3(horizontalInput * currentSpeed, body.velocity.y, verticalInput * currentSpeed));
-            }
+            body.velocity = transform.TransformDirection(new Vector3(horizontalInput * currentSpeed, body.velocity.y, verticalInput * currentSpeed));
         }
-        //else if (!DetectOnWall())
-        //{
-        //    body.velocity = transform.TransformDirection(new Vector3(horizontalInput * currentSpeed, body.velocity.y, verticalInput * currentSpeed));
-        //}
-        //else
-        //{
-        //    //currentSpeed = 0;
-        //    body.velocity = transform.TransformDirection(new Vector3(horizontalInput*currentSpeed, -0.5f, verticalInput *currentSpeed));
-        //}
-       if(Input.GetButtonDown("Jump")&& jumpCount<maxJumps && !disablePlayerMovementUp)
-       {
+        if (Input.GetButtonDown("Jump") && jumpCount < maxJumps)
+        {
             exitingSlope = true;
             body.velocity = new Vector3(body.velocity.x, body.velocity.y + jumpForce, body.velocity.z);
             jumpCount++;
-       }
-       if (body.velocity.y == 0)
-       {
-            jumpCount=0;
+        }
+        if (body.velocity.y < 0.125 && body.velocity.y > -0.125)
+        {
             exitingSlope = false;
-       }
-       /*
-        if (DetectOnWall())
-        {
-            currentSpeed = 0;
-            body.velocity = new Vector3(body.velocity.x,-0.5f,body.velocity.z);
-            onWall = true;
         }
-        else if (currentSpeed ==0)
+        if (checkIfGrounded())
         {
-            currentSpeed = speed;
+            jumpCount = 0;
         }
-       */
 
-        //turn off gravity while on slope 
+
+        //turn off gravity while on slope
         body.useGravity = !OnSlope();
+        this.Sprint();
     }
 
     public void MyInput()
@@ -126,26 +97,36 @@ public class Movement : MonoBehaviour
         verticalInput = Input.GetAxis("Vertical");
     }
 
-    public void SetSpeedUsed() {
+    public void SetSpeedUsed()
+    {
         if (sliding)
         {
 
             if (OnSlope() && body.velocity.y < 0.1f)
                 desiredMoveSpeed = slideSpeed;
             else
-                desiredMoveSpeed = speedValue;
-        }
-        else
-        {
-            this.Sprint();
+                this.Sprint();
+            desiredMoveSpeed = speedValue;
         }
         FlattenSpeedCurve();
     }
-
+    private bool checkIfGrounded()
+    {
+        groundCheckDistance = 0.3f+ bufferCheckDistance;
+        RaycastHit groundHit;
+        if (Physics.Raycast(transform.position, - transform.up, out groundHit, groundCheckDistance))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     private void FlattenSpeedCurve()
     {
         //check if desiredMoveSpeed has changed drastically
-        if(Mathf.Abs(desiredMoveSpeed - lastDesiredMoveSpeed) > 4f && currentSpeed !=0)
+        if (Mathf.Abs(desiredMoveSpeed - lastDesiredMoveSpeed) > 4f && currentSpeed != 0)
         {
             StopAllCoroutines();
             StartCoroutine(SmoothlyLerpMoveSpeed());
@@ -176,28 +157,18 @@ public class Movement : MonoBehaviour
         currentSpeed = desiredMoveSpeed;
     }
 
-    private void setMoveDirection() {
+    private void setMoveDirection()
+    {
         // calculate movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
     }
 
     public bool OnSlope()
     {
-        if(Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f)) 
+        if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
         {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             return angle < maxSlopeAngle && angle != 0;
-        }
-
-        return false;
-    }
-    
-    public bool DetectOnWall()
-    {
-        if(Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f)) 
-        {
-            float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
-            return angle > maxSlopeAngle;
         }
 
         return false;
@@ -208,20 +179,21 @@ public class Movement : MonoBehaviour
         return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
     }
 
-    private void SpeedControll() 
-    { 
+    private void SpeedControll()
+    {
         //limiting speed on slope
-        if(OnSlope() && !exitingSlope)
+        if (OnSlope() && !exitingSlope)
         {
             if (body.velocity.magnitude > currentSpeed)
                 body.velocity = body.velocity.normalized * currentSpeed;
         }
         //limit speed value for all other cases
-        else {
+        else
+        {
             Vector3 flatVel = new Vector3(body.velocity.x, 0f, body.velocity.z);
 
             //limit velocity if needed
-            if(flatVel.magnitude > currentSpeed)
+            if (flatVel.magnitude > currentSpeed)
             {
                 Vector3 limitedVel = flatVel.normalized * currentSpeed;
                 body.velocity = new Vector3(limitedVel.x, body.velocity.y, limitedVel.z);
@@ -230,17 +202,17 @@ public class Movement : MonoBehaviour
     }
     public void Sprint()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift)&&sprintEnabeled==true&&bootsPickedUp==true)
-       {
+        if (Input.GetKeyDown(KeyCode.LeftShift) && sprintEnabeled && bootsPickedUp)
+        {
             speedValue = sprintSpeed;
             sprintEnabeled = false;
-       }
-       else
-            if(Input.GetKeyDown(KeyCode.LeftShift)&&sprintEnabeled==false&&bootsPickedUp==true)
-       {
+        }
+        else
+            if (Input.GetKeyDown(KeyCode.LeftShift) && sprintEnabeled == false && bootsPickedUp == true)
+        {
             sprintEnabeled = true;
             speedValue = speed;
-       }
+        }
     }
     public void pickUpBoots()
     {
@@ -250,6 +222,6 @@ public class Movement : MonoBehaviour
 
     public void pickUpJetPack()
     {
-          maxJumps = 2;
+        maxJumps = 2;
     }
 }
