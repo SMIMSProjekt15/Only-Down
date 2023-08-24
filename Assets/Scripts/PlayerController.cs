@@ -73,10 +73,9 @@ public class Movement : MonoBehaviour
         else
         {
             disablePlayerMovementUp = DetectOnWall();
-            if (disablePlayerMovementUp) //&& body.velocity.y > 0)
+            if (disablePlayerMovementUp && body.velocity.y > 0)
             {
-                body.velocity = transform.TransformDirection(new Vector3(0, 0, 0));
-                //body.velocity = transform.TransformDirection(new Vector3(horizontalInput * currentSpeed, -10f, verticalInput * currentSpeed));
+                body.velocity = transform.TransformDirection(new Vector3(horizontalInput * currentSpeed, -10f, verticalInput * currentSpeed));
             }
             else
             {
