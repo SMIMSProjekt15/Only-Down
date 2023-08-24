@@ -23,7 +23,7 @@ public class Movement : MonoBehaviour
     public float playerHeight;
 
     
-    public Rigidbody body;
+    //public Rigidbody body;
     private Vector3 moveDirection;
     public Transform orientation;
     float horizontalInput;
@@ -80,7 +80,7 @@ public class Movement : MonoBehaviour
             exitingSlope = false;
        }
        this.Sprint();
-       }
+       
 
         //turn off gravity while on slope 
         body.useGravity = !OnSlope();
