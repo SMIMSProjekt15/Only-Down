@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -22,6 +23,9 @@ public class Movement : MonoBehaviour
 
     public float playerHeight;
 
+    [Header("WallMovementFix")]
+    public float yVelocity;
+
     
     //public Rigidbody body;
     private Vector3 moveDirection;
@@ -39,6 +43,7 @@ public class Movement : MonoBehaviour
     private bool sprintEnabeled = false;
     private bool bootsPickedUp = false;
     public bool onWall = false;
+    public bool disablePlayerMovementUp = false;
 
 
     // Start is called before the first frame update
@@ -55,8 +60,8 @@ public class Movement : MonoBehaviour
         setMoveDirection();
         SpeedControll();
         SetSpeedUsed(); //set wheter to use the slide speed (can increase even --> no limit) or to use normal speed
-        
-        
+
+
         //on slope
         if (OnSlope() && !exitingSlope)
         {
@@ -66,10 +71,28 @@ public class Movement : MonoBehaviour
                 body.AddForce(Vector3.down * 80f, ForceMode.Force);
         }
         else
-        { 
-            body.velocity = transform.TransformDirection(new Vector3(horizontalInput * currentSpeed, body.velocity.y, verticalInput * currentSpeed));
+        {
+            disablePlayerMovementUp = DetectOnWall();
+            if (disablePlayerMovementUp && body.velocity.y > 0)
+            {
+                body.velocity = transform.TransformDirection(new Vector3(horizontalInput * currentSpeed, -10f, verticalInput * currentSpeed));
+            }
+            else
+            {
+
+                body.velocity = transform.TransformDirection(new Vector3(horizontalInput * currentSpeed, body.velocity.y, verticalInput * currentSpeed));
+            }
         }
-       if(Input.GetButtonDown("Jump")&& jumpCount<maxJumps)
+        //else if (!DetectOnWall())
+        //{
+        //    body.velocity = transform.TransformDirection(new Vector3(horizontalInput * currentSpeed, body.velocity.y, verticalInput * currentSpeed));
+        //}
+        //else
+        //{
+        //    //currentSpeed = 0;
+        //    body.velocity = transform.TransformDirection(new Vector3(horizontalInput*currentSpeed, -0.5f, verticalInput *currentSpeed));
+        //}
+       if(Input.GetButtonDown("Jump")&& jumpCount<maxJumps && !disablePlayerMovementUp)
        {
             exitingSlope = true;
             body.velocity = new Vector3(body.velocity.x, body.velocity.y + jumpForce, body.velocity.z);
@@ -80,17 +103,19 @@ public class Movement : MonoBehaviour
             jumpCount=0;
             exitingSlope = false;
        }
-       
-        if (detectOnWall())
+       /*
+        if (DetectOnWall())
         {
-            speedValue = 0;
+            currentSpeed = 0;
             body.velocity = new Vector3(body.velocity.x,-0.5f,body.velocity.z);
             onWall = true;
         }
-        if (!detectOnWall() && speedValue ==0)
+        else if (currentSpeed ==0)
         {
-            speedValue = speed;
+            currentSpeed = speed;
         }
+       */
+
         //turn off gravity while on slope 
         body.useGravity = !OnSlope();
     }
@@ -167,7 +192,7 @@ public class Movement : MonoBehaviour
         return false;
     }
     
-    public bool detectOnWall()
+    public bool DetectOnWall()
     {
         if(Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f)) 
         {

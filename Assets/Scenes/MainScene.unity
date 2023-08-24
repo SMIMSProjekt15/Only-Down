@@ -812,6 +812,14 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 13400000, guid: 028822570ac20f34fbe095fbd1cb86e4, type: 2}
+    - target: {fileID: 3613219821342053938, guid: 00de8a081f20e4d448a920fb89d5ac20, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3613219821342053938, guid: 00de8a081f20e4d448a920fb89d5ac20, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8572223224631790949, guid: 00de8a081f20e4d448a920fb89d5ac20, type: 3}
       propertyPath: jumpForce
       value: 3
@@ -826,7 +834,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8572223224631790949, guid: 00de8a081f20e4d448a920fb89d5ac20, type: 3}
       propertyPath: maxSlopeAngle
-      value: 40
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1308,11 +1316,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 832708052064377400, guid: 00de8a081f20e4d448a920fb89d5ac20, type: 3}
   m_PrefabInstance: {fileID: 685676931}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1445372276 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1889120186808459289, guid: 00de8a081f20e4d448a920fb89d5ac20, type: 3}
-  m_PrefabInstance: {fileID: 685676931}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1445372277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1326,7 +1329,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orientation: {fileID: 77510446}
-  playerObj: {fileID: 1445372276}
   maxSlideTime: 0.75
   slideForce: 200
   slideTimer: 0
@@ -1487,7 +1489,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orientation: {fileID: 77510446}
-  playerObj: {fileID: 0}
   maxSlideTime: 0.75
   slideForce: 200
   slideTimer: 0
