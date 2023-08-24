@@ -65,7 +65,7 @@ public class Movement : MonoBehaviour
                 body.AddForce(Vector3.down * 80f, ForceMode.Force);
         }
         else
-        {
+        { 
             body.velocity = transform.TransformDirection(new Vector3(horizontalInput * currentSpeed, body.velocity.y, verticalInput * currentSpeed));
         }
        if(Input.GetButtonDown("Jump")&& jumpCount<maxJumps)
@@ -79,7 +79,6 @@ public class Movement : MonoBehaviour
             jumpCount=0;
             exitingSlope = false;
        }
-       this.Sprint();
        
 
         //turn off gravity while on slope 
@@ -94,11 +93,12 @@ public class Movement : MonoBehaviour
 
     public void SetSpeedUsed() {
         if (sliding)
-        { 
+        {
 
             if (OnSlope() && body.velocity.y < 0.1f)
                 desiredMoveSpeed = slideSpeed;
             else
+                this.Sprint();
                 desiredMoveSpeed = speedValue;
         }
         FlattenSpeedCurve();
