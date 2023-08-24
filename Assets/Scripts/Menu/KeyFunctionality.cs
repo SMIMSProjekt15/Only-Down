@@ -22,6 +22,7 @@ public class KeyFunctionality : MonoBehaviour
     }
 
     void GoToMainMenu() {
+        Cursor.lockState = CursorLockMode.Confined;
         SceneManager.LoadScene(0);
     }
 }
