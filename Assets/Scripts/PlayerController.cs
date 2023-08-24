@@ -12,6 +12,8 @@ public class Movement : MonoBehaviour
     public float slideSpeed = 40f;
     public float currentSpeed;
 
+    private float groundCheckDistance;
+    //private float bufferCheckDistance = 0.00001f;
     private float desiredMoveSpeed;
     private float lastDesiredMoveSpeed;
     public bool sliding;
@@ -100,7 +102,7 @@ if (disablePlayerMovementUp && body.velocity.y > 0)
         //    //currentSpeed = 0;
         //    body.velocity = transform.TransformDirection(new Vector3(horizontalInput*currentSpeed, -0.5f, verticalInput *currentSpeed));
         //}
-       /*if(Input.GetButtonDown("Jump")&& jumpCount<maxJumps && !disablePlayerMovementUp)
+       if(Input.GetButtonDown("Jump")&& jumpCount<maxJumps && !disablePlayerMovementUp)
        {
             exitingSlope = true;
             body.velocity = new Vector3(body.velocity.x, body.velocity.y + jumpForce, body.velocity.z);
@@ -108,9 +110,8 @@ if (disablePlayerMovementUp && body.velocity.y > 0)
        }
        if (body.velocity.y == 0)
        {
-            jumpCount=0;
             exitingSlope = false;
-       }*/
+       }
        /*
         if (DetectOnWall())
         {
