@@ -13,6 +13,7 @@ public class WinTrigger : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.gameObject.name);
         if(other.CompareTag("Player"))
         {
             StaticTime.Time = script.FormatTime();

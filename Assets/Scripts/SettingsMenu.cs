@@ -5,7 +5,7 @@ public class SettingsMenu : MonoBehaviour
     public static float sensitivity = 0.50f;
     public void SetSensitivity(float pSensitivity)
     {
-        sensitivity = pSensitivity;
+        sensitivity = pSensitivity + 0.5f;
     }
     // Start is called before the first frame update
     void Start()
