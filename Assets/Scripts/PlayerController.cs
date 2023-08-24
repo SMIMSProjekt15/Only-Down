@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour
 {
 
     [Header("Movement")]
-    public float slideSpeed;
+    public float slideSpeed = 40f;
     public float currentSpeed;
 
     private float desiredMoveSpeed;
@@ -98,8 +98,11 @@ public class Movement : MonoBehaviour
             if (OnSlope() && body.velocity.y < 0.1f)
                 desiredMoveSpeed = slideSpeed;
             else
-                this.Sprint();
                 desiredMoveSpeed = speedValue;
+        }
+        else
+        {
+            this.Sprint();
         }
         FlattenSpeedCurve();
     }

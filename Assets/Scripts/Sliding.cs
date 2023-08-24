@@ -12,8 +12,8 @@ public class Sliding : MonoBehaviour
     private Movement pm;
 
     [Header("Sliding")]
-    public float maxSlideTime;
-    public float slideForce;
+    public float maxSlideTime = 0.75f;
+    public float slideForce = 200;
     public float slideTimer;
 
     public float slideYScale;
