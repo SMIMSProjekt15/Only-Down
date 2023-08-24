@@ -19,13 +19,16 @@ public class timer : MonoBehaviour
     void Update()
     {
         currentTime +=  Time.deltaTime;
-        DisplayTime(currentTime);
+        DisplayTime();
     }
-    void DisplayTime(float timeToDisplay)
+    void DisplayTime()
     {
-        timeToDisplay += 1;
-        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
-        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
-        timeText.text = string.Format("{0:00} : {1:00}", minutes, seconds);
+        timeText.text = FormatTime();
+    }
+    public string FormatTime()
+    {
+        float minutes = Mathf.FloorToInt(currentTime / 60);
+        float seconds = Mathf.FloorToInt(currentTime % 60);
+        return string.Format("{0:00} : {1:00}", minutes, seconds);
     }
 }
